@@ -1,0 +1,17 @@
+{
+  "name": "to-do-list",
+  "version": "1.0.0",
+  "description": "Advanced student productivity web application for a Hybrid Mobile Application Development assignment.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3"
+  }
+}
