@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4f46e5">
+  <title>StudyFlow - Student Productivity</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo"><span>✓</span><div><b>StudyFlow</b><small>Student Productivity</small></div></div>
+      <nav>
+        <button class="nav-item active" data-page="dashboard"><span>Dashboard</span></button>
+        <button class="nav-item" data-page="tasks"> <span>Tasks</span></button>
+        <button class="nav-item" data-page="planner"> <span>Planner</span></button>
+        <button class="nav-item" data-page="focus"><span>Focus</span></button>
+        <button class="nav-item" data-page="analytics"><span>Analytics</span></button>
+        <button class="nav-item" data-page="goals"><span>Goals</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button id="themeBtn" class="side-small">Dark Mode</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="menuBtn" class="mobile-menu">☰</button>
+        <div><p id="dateText"></p><h1 id="pageTitle">Dashboard</h1></div>
+        <button id="quickAdd" class="primary">+ Add Task</button>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page active-page">
+        <div class="hero">
+          <div><p id="greeting">Good day</p></div>
+          <div class="hero-progress"><strong id="heroPercent">0%</strong><span>today complete</span></div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat"><div><b id="totalStat">0</b><small>Total Tasks</small></div></div>
+          <div class="stat"><div><b id="pendingStat">0</b><small>Pending</small></div></div>
+          <div class="stat"><div><b id="completedStat">0</b><small>Completed</small></div></div>
+          <div class="stat"><div><b id="studyStat">0m</b><small>Focus Time</small></div></div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-title"><div><h3>Today's Tasks</h3></div><button class="text-btn" data-page-link="tasks">View all</button></div>
+            <div id="todayTasks"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title"><div><h3>Quick Focus</h3><small>25-minute deep work session</small></div></div>
+            <div class="mini-timer"><strong id="dashTimer">25:00</strong><span id="dashTimerStatus">Ready when you are</span><button id="dashFocusBtn" class="primary">Start Focus</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TASKS -->
+      <section id="tasks" class="page">
+        <div class="section-head"><div><h2>Task Manager</h2><p>Organize assignments, study and personal work.</p></div><button class="primary" id="addTask2">+ New Task</button></div>
+        <div class="toolbar">
+          <input id="search" placeholder="🔍 Search tasks...">
+          <select id="taskFilter"><option value="all">All</option><option value="pending">Pending</option><option value="completed">Completed</option><option value="high">High Priority</option><option value="overdue">Overdue</option></select>
+          <select id="taskSort"><option value="new">Recently Added</option><option value="due">Due Date</option><option value="priority">Priority</option><option value="az">A-Z</option></select>
+        </div>
+        <div id="taskList" class="task-list"></div>
+      </section>
+
+      <!-- PLANNER -->
+      <section id="planner" class="page">
+        <div class="section-head"><div><h2>Study Planner</h2><p>Plan your study sessions and deadlines.</p></div><button class="primary" id="addEventBtn">＋ Add Schedule</button></div>
+        <div class="planner-grid">
+          <div class="calendar panel"><div class="calendar-head"><button id="prevMonth">‹</button><h3 id="monthTitle"></h3><button id="nextMonth">›</button></div><div id="calendar"></div></div>
+          <div class="panel"><div class="panel-title"><div><h3>Selected Day</h3><small id="selectedDateLabel"></small></div></div><div id="scheduleList"></div></div>
+        </div>
+      </section>
+
+      <!-- FOCUS -->
+      <section id="focus" class="page">
+        <div class="focus-page">
+          <div class="focus-card panel">
+            <span class="eyebrow">DEEP WORK</span><h2>Focus Session</h2><p>Choose a task and work without distractions.</p>
+            <div class="big-timer" id="bigTimer">25:00</div>
+            <div class="timer-buttons"><button id="startTimer" class="primary">▶ Start</button><button id="resetTimer" class="secondary">↻ Reset</button></div>
+            <div class="focus-presets"><button data-min="25">25 min</button><button data-min="15">15 min</button><button data-min="5">5 min</button></div>
+          </div>
+          <div class="panel focus-tasks"><h3>Pending Tasks</h3><div id="focusTasks"></div></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section id="analytics" class="page">
+        <div class="section-head"><div><h2>Productivity Analytics</h2><p>Understand your study and task completion patterns.</p></div></div>
+        <div class="analytics-grid">
+          <div class="panel"><h3>Task Completion</h3><div class="donut" id="donut"><strong id="donutText">0%</strong></div><p class="center" id="analyticsSummary">No tasks yet.</p></div>
+          <div class="panel"><h3>Weekly Progress</h3><div id="weeklyBars" class="bars"></div></div>
+          <div class="panel full"><h3>Performance</h3><div class="performance"><div><b id="perfComplete">0%</b><span>Tasks completed</span></div><div><b id="perfPending">0</b><span>Pending tasks</span></div><div><b id="perfFocus">0m</b><span>Focus time</span></div><div><b id="perfGoals">0%</b><span>Goal progress</span></div></div></div>
+        </div>
+      </section>
+
+      <!-- GOALS -->
+      <section id="goals" class="page">
+        <div class="section-head"><div><h2>My Goals</h2><p>Track long-term academic and personal goals.</p></div><button id="addGoalBtn" class="primary">＋ Add Goal</button></div>
+        <div id="goalList" class="goal-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- TASK MODAL -->
+  <div id="taskModal" class="modal"><div class="modal-box">
+    <div class="modal-head"><div><span class="eyebrow">TASK</span><h2 id="modalTitle">New Task</h2></div><button class="close" id="closeTask">×</button></div>
+    <form id="taskForm">
+      <label>Task Title *<input id="titleInput" required maxlength="100" placeholder="e.g. Complete DBMS assignment"></label>
+      <label>Description<textarea id="descInput" rows="3" placeholder="Add notes..."></textarea></label>
+      <div class="form-row"><label>Category<select id="categoryInput"><option value="study">📚 Study</option><option value="work">💼 Work</option><option value="personal">🏠 Personal</option><option value="health">❤️ Health</option></select></label><label>Priority<select id="priorityInput"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label></div>
+      <div class="form-row"><label>Due Date<input id="dateInput" type="date"></label><label>Due Time<input id="timeInput" type="time"></label></div>
+      <label class="check-line"><input type="checkbox" id="importantInput"> ⭐ Mark important</label>
+      <div class="modal-actions"><button type="button" class="secondary" id="cancelTask">Cancel</button><button class="primary">Save Task</button></div>
+    </form>
+  </div></div>
+
+  <!-- EVENT MODAL -->
+  <div id="eventModal" class="modal"><div class="modal-box">
+    <div class="modal-head"><div><span class="eyebrow">PLANNER</span><h2>Add Schedule</h2></div><button class="close" id="closeEvent">×</button></div>
+    <form id="eventForm">
+      <label>Subject / Activity<input id="eventTitle" required placeholder="e.g. DSA revision"></label>
+      <div class="form-row"><label>Date<input id="eventDate" type="date" required></label><label>Time<input id="eventTime" type="time" required></label></div>
+      <label>Duration<select id="eventDuration"><option>30 minutes</option><option selected>60 minutes</option><option>90 minutes</option><option>120 minutes</option></select></label>
+      <div class="modal-actions"><button type="button" class="secondary" id="cancelEvent">Cancel</button><button class="primary">Add Schedule</button></div>
+    </form>
+  </div></div>
+
+  <!-- GOAL MODAL -->
+  <div id="goalModal" class="modal"><div class="modal-box">
+    <div class="modal-head"><div><span class="eyebrow">GOAL</span><h2>Add Goal</h2></div><button class="close" id="closeGoal">×</button></div>
+    <form id="goalForm"><label>Goal Title<input id="goalTitle" required placeholder="e.g. Finish DSA syllabus"></label><label>Target<input id="goalTarget" type="number" min="1" value="10"></label><label>Current Progress<input id="goalProgress" type="number" min="0" value="0"></label><div class="modal-actions"><button type="button" class="secondary" id="cancelGoal">Cancel</button><button class="primary">Save Goal</button></div></form>
+  </div></div>
+
+  <nav class="bottom-nav">
+    <button data-page="dashboard">🏠<small>Home</small></button><button data-page="tasks">✓<small>Tasks</small></button><button data-page="planner">📅<small>Planner</small></button><button data-page="focus">🎯<small>Focus</small></button><button data-page="analytics">📊<small>Stats</small></button>
+  </nav>
+  <script src="script.js"></script>
+</body>
+</html>
