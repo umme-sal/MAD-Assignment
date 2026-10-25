@@ -19,5 +19,7 @@ Copy `index.html`, `style.css`, and `script.js` into your Capacitor web asset di
 
 Example:
 npm install
+
 npx cap sync android
+
 npx cap open android
